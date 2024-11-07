@@ -37,7 +37,7 @@ class Signup extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 75.0),
                 child: Text(
-                  'Login to your Account',
+                  'Create your Account',
                   style: GoogleFonts.montserrat(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w500,
@@ -79,7 +79,59 @@ class Signup extends StatelessWidget {
                 obscureText: true,
                 style: GoogleFonts.montserrat(color: Colors.white),
                 decoration: InputDecoration(
+                  hintText: 'Email',
+                  hintStyle: GoogleFonts.montserrat(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Color(0xFF165F4B)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        BorderSide(color: Color(0xFF165F4B), width: 2.5),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Container(
+              height: 69.0,
+              width: 322.0,
+              child: TextField(
+                style: GoogleFonts.montserrat(color: Colors.white),
+                decoration: InputDecoration(
                   hintText: 'Password',
+                  hintStyle: GoogleFonts.montserrat(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Color(0xFF165F4B)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        BorderSide(color: Color(0xFF165F4B), width: 2.5),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 15),
+            Container(
+              height: 69.0,
+              width: 322.0,
+              child: TextField(
+                style: GoogleFonts.montserrat(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: 'Confirm Password',
                   hintStyle: GoogleFonts.montserrat(color: Colors.white70),
                   filled: true,
                   fillColor: Colors.transparent,
@@ -113,7 +165,7 @@ class Signup extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Sign in',
+                  'Sign up',
                   style: GoogleFonts.montserrat(
                     fontSize: 18,
                     color: Colors.white,
@@ -124,14 +176,14 @@ class Signup extends StatelessWidget {
             SizedBox(height: 10),
             RichText(
               text: TextSpan(
-                text: 'Don’t have an Account? ',
+                text: 'Already have an Account? ',
                 style: GoogleFonts.montserrat(
                   color: Colors.white,
                   fontSize: 12.0,
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                      text: 'Sign Up',
+                      text: 'Sign in',
                       style: GoogleFonts.montserrat(
                           color: Color(0xFF165F4B),
                           fontSize: 12.0,
