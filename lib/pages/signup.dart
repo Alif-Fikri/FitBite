@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
-import 'package:fitbite/pages/signup.dart';
+import 'package:fitbite/pages/login.dart';
 
-class LoginPage extends StatelessWidget {
+class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +139,7 @@ class LoginPage extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Signup()));
+                              builder: (context) => LoginPage()));
                         }),
                 ],
               ),

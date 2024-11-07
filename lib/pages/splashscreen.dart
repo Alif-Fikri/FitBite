@@ -41,8 +41,8 @@ class _SplashScreenState extends State<SplashScreen>
 
     // Animasi fade untuk teks
     _textFadeAnimation = Tween<double>(
-      begin: -1.0, // Mulai dengan transparan
-      end: 1.0, // Berakhir sepenuhnya tampak
+      begin: -1.0, 
+      end: 1.0, 
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeIn,
