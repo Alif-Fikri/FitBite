@@ -65,7 +65,14 @@ flutter:
    - assets/1.png
    - assets/2.png
    - assets/chart.png
-
+   - assets/food1.png
+   - assets/food2.png
+   - assets/food3.png
+   - assets/food4.png
+   - assets/food5.png
+   - assets/food6.png
+   - assets/food7.png
+   - assets/food8.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

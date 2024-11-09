@@ -10,9 +10,14 @@ class MenuItem {
 class HotSaleMenu {
   static List<MenuItem> getFilteredItems(String searchText) {
     List<MenuItem> items = [
-      MenuItem('Chicken Salad', 45, 'https://via.placeholder.com/150'),
-      MenuItem('Rice With Meat', 45, 'https://via.placeholder.com/150'),
-      MenuItem('Rice With Meat', 45, 'https://via.placeholder.com/150'),
+      MenuItem('Chicken Salad', 45, 'assets/food1.png'),
+      MenuItem('Rice With Meat', 55, 'assets/food2.png'),
+      MenuItem('Rice With Meat', 45, 'assets/food3.png'),
+      MenuItem('Rice With Meat', 45, 'assets/food4.png'),
+      MenuItem('Rice With Meat', 45, 'assets/food5.png'),
+      MenuItem('Rice With Meat', 45, 'assets/food6.png'),
+      MenuItem('Rice With Meat', 45, 'assets/food7.png'),
+      MenuItem('Rice With Meat', 45, 'assets/food8.png'),
       // Add more items
     ];
     return items
@@ -25,7 +30,7 @@ class HotSaleMenu {
 class PopularMenu {
   static List<MenuItem> getFilteredItems(String searchText) {
     List<MenuItem> items = [
-      MenuItem('Rice with Meat', 55, 'https://via.placeholder.com/150'),
+      MenuItem('Rice with Meat', 55, 'assets/food1.png'),
       // Add more items
     ];
     return items
@@ -38,7 +43,7 @@ class PopularMenu {
 class NewMenu {
   static List<MenuItem> getFilteredItems(String searchText) {
     List<MenuItem> items = [
-      MenuItem('Vegetable Stir-fry', 30, 'https://via.placeholder.com/150'),
+      MenuItem('Vegetable Stir-fry', 30, 'assets/food1.png'),
       // Add more items
     ];
     return items
@@ -51,7 +56,7 @@ class NewMenu {
 class AllMenu {
   static List<MenuItem> getFilteredItems(String searchText) {
     List<MenuItem> items = [
-      MenuItem('Pasta', 40, 'https://via.placeholder.com/150'),
+      MenuItem('Pasta', 40, 'assets/food1.png'),
       // Add all items from different categories
     ];
     return items
