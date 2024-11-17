@@ -1,3 +1,4 @@
+import 'package:fitbite/pages/cart.dart';
 import 'package:fitbite/pages/home.dart';
 import 'package:fitbite/pages/profile.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,12 @@ class MenuNav extends StatefulWidget {
 }
 
 class _MenuNavState extends State<MenuNav> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
-  // Daftar halaman yang berbeda
   final List<Widget> _pages = [
     HomePages(),
     InboxScreen(),
-    CartScreen(),
+    CartPage(),
     FavoriteScreen(),
     ProfilePage(),
   ];
@@ -29,7 +29,7 @@ class _MenuNavState extends State<MenuNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex], // Halaman berdasarkan index aktif
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -73,19 +73,6 @@ class InboxScreen extends StatelessWidget {
     return const Center(
       child: Text(
         'Inbox Page',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-// Halaman Cart
-class CartScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Cart Page',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );
