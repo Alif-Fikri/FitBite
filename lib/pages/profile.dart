@@ -9,20 +9,15 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff6C8776),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: Text(
-          'Profile',
+          'Information Account',
           style: GoogleFonts.montserrat(
             fontSize: 20,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -67,7 +62,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           ProfileButton(
             icon: Icons.lock,
             text: "Akun saya",
