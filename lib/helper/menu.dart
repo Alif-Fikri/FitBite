@@ -14,7 +14,7 @@ class MenuNav extends StatefulWidget {
 }
 
 class _MenuNavState extends State<MenuNav> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   final List<Widget> _pages = [
     HomePages(),
@@ -53,9 +53,13 @@ class _MenuNavState extends State<MenuNav> {
           BottomNavigationBarItem(
             icon: Consumer<CartProvider>(
               builder: (context, cartProvider, child) {
+                
+                if (cartProvider.totalItems == 0) {
+                  return Icon(Icons.shopping_cart);
+                }
                 return badges.Badge(
                   badgeContent: Text(
-                    '${cartProvider.totalItems}', // Total item di keranjang
+                    '${cartProvider.totalItems}',
                     style: TextStyle(color: Colors.white),
                   ),
                   badgeStyle: badges.BadgeStyle(badgeColor: Colors.red),

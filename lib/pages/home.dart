@@ -166,65 +166,103 @@ class FoodGrid extends StatelessWidget {
   }
 }
 
-// Food Item Card Widget
-class FoodItemCard extends StatelessWidget {
+class FoodItemCard extends StatefulWidget {
   final MenuItem menuItem;
-  final Function(MenuItem)
-      onAddToCart; // Fungsi untuk menangani penambahan ke cart
+  final Function(MenuItem) onAddToCart;
 
   FoodItemCard({required this.menuItem, required this.onAddToCart});
 
   @override
+  _FoodItemCardState createState() => _FoodItemCardState();
+}
+
+class _FoodItemCardState extends State<FoodItemCard>
+    with SingleTickerProviderStateMixin {
+  double _scale = 1.0;
+
+  void _onTapDown(TapDownDetails details) {
+    setState(() {
+      _scale = 0.9; // Mengecilkan card
+    });
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    setState(() {
+      _scale = 1.0; // Kembali ke ukuran normal
+    });
+    
+  }
+
+  void _onTapCancel() {
+    setState(() {
+      _scale = 1.0;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 190,
-      width: 160,
-      decoration: BoxDecoration(
-        color: Color(0xFFD9D9D9),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(menuItem.imageUrl, fit: BoxFit.cover),
-              ),
-            ),
+    return GestureDetector(
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: AnimatedScale(
+        scale: _scale,
+        duration: Duration(milliseconds: 150), // Durasi animasi card
+        curve: Curves.easeInOut,
+        child: Container(
+          height: 190,
+          width: 160,
+          decoration: BoxDecoration(
+            color: Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(15),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(menuItem.name,
-                    style: GoogleFonts.montserrat(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black)),
-                Text('${menuItem.price}k',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 13.0, color: Colors.black)),
-                SizedBox(height: 4),
-                Text('Details',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 10.0,
-                        color: Color(0xFF6C8776),
-                        decoration: TextDecoration.underline)),
-              ],
-            ),
-          ),
-          Stack(
+          child: Stack(
             children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(widget.menuItem.imageUrl,
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(widget.menuItem.name,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black)),
+                        Text('${widget.menuItem.price}k',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 13.0, color: Colors.black)),
+                        SizedBox(height: 4),
+                        Text('Details',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 10.0,
+                                color: Color(0xFF6C8776),
+                                decoration: TextDecoration.underline)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
                   onTap: () {
-                    // Tambahkan aksi di sini
-                    onAddToCart(menuItem);
+                    widget
+                        .onAddToCart(widget.menuItem); 
                   },
+                  behavior: HitTestBehavior
+                      .translucent, // Mencegah event gesture ke parent
                   child: Image.asset(
                     'assets/chart.png',
                     height: 23,
@@ -233,8 +271,8 @@ class FoodItemCard extends StatelessWidget {
                 ),
               ),
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
