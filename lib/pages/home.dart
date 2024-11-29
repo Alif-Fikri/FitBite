@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fitbite/helper/menuitem.dart';
+import 'package:provider/provider.dart';
+import 'package:fitbite/helper/cartprovider.dart';
+import 'package:fitbite/helper/cartitem.dart';
 
 class HomePages extends StatefulWidget {
   @override
@@ -12,7 +15,7 @@ class _HomePagesState extends State<HomePages>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _searchText = '';
-  int _selectedIndex = 0;
+  List<MenuItem> cartItems = [];
 
   @override
   void initState() {
@@ -21,10 +24,18 @@ class _HomePagesState extends State<HomePages>
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Navigate to other pages based on index if needed
+    setState(() {});
+  }
+
+  void _addToCart(MenuItem item) {
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.addToCart(CartItem(
+      name: item.name,
+      price: item.price,
+      image: item.imageUrl,
+      quantity: 1,
+      calories: int.parse(item.calories),
+    ));
   }
 
   @override
@@ -102,11 +113,21 @@ class _HomePagesState extends State<HomePages>
                 controller: _tabController,
                 children: [
                   FoodGrid(
-                      menuItems: HotSaleMenu.getFilteredItems(_searchText)),
+                    menuItems: HotSaleMenu.getFilteredItems(_searchText),
+                    onAddToCart: _addToCart,
+                  ),
                   FoodGrid(
-                      menuItems: PopularMenu.getFilteredItems(_searchText)),
-                  FoodGrid(menuItems: NewMenu.getFilteredItems(_searchText)),
-                  FoodGrid(menuItems: AllMenu.getFilteredItems(_searchText)),
+                    menuItems: PopularMenu.getFilteredItems(_searchText),
+                    onAddToCart: _addToCart,
+                  ),
+                  FoodGrid(
+                    menuItems: NewMenu.getFilteredItems(_searchText),
+                    onAddToCart: _addToCart,
+                  ),
+                  FoodGrid(
+                    menuItems: AllMenu.getFilteredItems(_searchText),
+                    onAddToCart: _addToCart,
+                  ),
                 ],
               ),
             ),
@@ -120,8 +141,9 @@ class _HomePagesState extends State<HomePages>
 // Food Grid Widget
 class FoodGrid extends StatelessWidget {
   final List<MenuItem> menuItems;
+  final Function(MenuItem) onAddToCart;
 
-  FoodGrid({required this.menuItems});
+  FoodGrid({required this.menuItems, required this.onAddToCart});
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +157,10 @@ class FoodGrid extends StatelessWidget {
       ),
       itemCount: menuItems.length,
       itemBuilder: (context, index) {
-        return FoodItemCard(menuItem: menuItems[index]);
+        return FoodItemCard(
+          menuItem: menuItems[index],
+          onAddToCart: onAddToCart, // Mengoper fungsi ke FoodItemCard
+        );
       },
     );
   }
@@ -144,8 +169,10 @@ class FoodGrid extends StatelessWidget {
 // Food Item Card Widget
 class FoodItemCard extends StatelessWidget {
   final MenuItem menuItem;
+  final Function(MenuItem)
+      onAddToCart; // Fungsi untuk menangani penambahan ke cart
 
-  FoodItemCard({required this.menuItem});
+  FoodItemCard({required this.menuItem, required this.onAddToCart});
 
   @override
   Widget build(BuildContext context) {
@@ -189,9 +216,24 @@ class FoodItemCard extends StatelessWidget {
               ],
             ),
           ),
-          Align(
-              alignment: Alignment.bottomRight,
-              child: Image.asset('assets/chart.png', height: 23, width: 24)),
+          Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    // Tambahkan aksi di sini
+                    onAddToCart(menuItem);
+                  },
+                  child: Image.asset(
+                    'assets/chart.png',
+                    height: 23,
+                    width: 24,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
