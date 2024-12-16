@@ -1,4 +1,5 @@
 import 'package:fitbite/pages/cart.dart';
+import 'package:fitbite/pages/favorite.dart';
 import 'package:fitbite/pages/home.dart';
 import 'package:fitbite/pages/profile.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,13 @@ class MenuNav extends StatefulWidget {
 }
 
 class _MenuNavState extends State<MenuNav> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
 
   final List<Widget> _pages = [
     HomePages(),
     InboxScreen(),
     CartPage(),
-    FavoriteScreen(),
+    FavoritePage(),
     ProfilePage(),
   ];
 
@@ -38,7 +39,7 @@ class _MenuNavState extends State<MenuNav> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedItemColor: Color(0xFF6C8776), // Warna saat aktif
-        unselectedItemColor: Colors.grey, // Warna saat tidak aktif
+        unselectedItemColor: Colors.grey,
         selectedLabelStyle:
             GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w600),
         items: [
@@ -53,7 +54,6 @@ class _MenuNavState extends State<MenuNav> {
           BottomNavigationBarItem(
             icon: Consumer<CartProvider>(
               builder: (context, cartProvider, child) {
-                
                 if (cartProvider.totalItems == 0) {
                   return Icon(Icons.shopping_cart);
                 }
@@ -98,15 +98,3 @@ class InboxScreen extends StatelessWidget {
   }
 }
 
-// Halaman Favorite
-class FavoriteScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Favorite Page',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
